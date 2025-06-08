@@ -18,13 +18,13 @@ Er ermöglicht die schnelle Berechnung und Gegenüberstellung von Fahrzeugkosten
 
 ## 📸 Vorschau
 
-<img src="preview.png" alt="Screenshot" width="400">
+<img src="preview.jpg" alt="Screenshot" width="400">
 
 ---
 
 ## 🚀 Live
 
-👉 [Zur GitHub Pages Version](https://DEIN-USERNAME.github.io/teilauto-kalkulator/)
+👉 [Zur GitHub Pages Version](https://zzeeiikk.github.io/teilauto-kalkulator/)
 
 ---
 
@@ -38,20 +38,22 @@ Du kannst das Projekt lokal testen oder auf GitHub Pages hosten:
 git clone https://github.com/DEIN-USERNAME/teilauto-kalkulator.git
 cd teilauto-kalkulator
 open index.html
+```
 
 ### Oder GitHub Pages aktivieren:
-	1.	Repository erstellen (z. B. teilauto-kalkulator)
-	2.	index.html hochladen
-	3.	In den Repository Settings > Pages > „main / root“ auswählen
-	4.	Deine Seite ist öffentlich unter:
+1. Repository erstellen (z. B. teilauto-kalkulator)
+2. index.html hochladen
+3. In den Repository Settings > Pages > „main / root“ auswählen
+4. Deine Seite ist öffentlich unter:
 https://dein-username.github.io/teilauto-kalkulator/
 
 ---
 
 ## 🧱 Verwendete Technologien
-	•	Tailwind CSS – für responsives, modernes Design
-	•	Plain JavaScript (Vanilla JS)
-	•	GitHub Pages – Hosting
+
+* Tailwind CSS – für responsives, modernes Design
+* Plain JavaScript (Vanilla JS)
+* GitHub Pages – Hosting
 
 ---
 
