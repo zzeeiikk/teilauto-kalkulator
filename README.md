@@ -58,4 +58,5 @@ https://dein-username.github.io/teilauto-kalkulator/
 ## 📄 Lizenz
 
 MIT – frei verwendbar, gern mit Credit oder Link zurück.
+
 Kein offizielles Produkt von teilAuto!
