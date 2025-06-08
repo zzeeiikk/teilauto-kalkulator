@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Fahrzeuggrößen-Vergleich | teilAuto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
+    <h1 class="text-2xl font-bold mb-6 text-center text-blue-700">Fahrzeuggrößen-Vergleich (teilAuto)</h1>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-6">
+      <div>
+        <label class="block font-medium">Tarif wählen:</label>
+        <select id="tarif" class="w-full border rounded p-2">
+          <option value="start">Starttarif</option>
+          <option value="rahmen">Rahmentarif</option>
+          <option value="vielfahrer">Vielfahrertarif</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block font-medium">Gebuchte Zeit (in Stunden):</label>
+        <input type="number" id="stunden" value="2" min="1" class="w-full border rounded p-2" />
+      </div>
+
+      <div>
+        <label class="block font-medium">Gefahrene Kilometer:</label>
+        <input type="number" id="kilometer" value="20" min="0" class="w-full border rounded p-2" />
+      </div>
+    </div>
+
+    <button onclick="vergleicheFahrzeuge()" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+      Vergleich anzeigen
+    </button>
+
+    <div id="vergleich" class="mt-6"></div>
+  </div>
+
+  <script>
+    const tarife = {
+      start: {
+        name: "Starttarif",
+        farbe: "bg-yellow-50",
+        preise: {
+          Minis: { zeit: 2.52, km: 0.30 },
+          Kleine: { zeit: 2.88, km: 0.31 },
+          Kompakte: { zeit: 3.12, km: 0.37 },
+          Mittelklasse: { zeit: 3.60, km: 0.40 },
+          Transporter: { zeit: 4.20, km: 0.47 }
+        }
+      },
+      rahmen: {
+        name: "Rahmentarif",
+        farbe: "bg-green-50",
+        preise: {
+          Minis: { zeit: 2.10, km: 0.25 },
+          Kleine: { zeit: 2.40, km: 0.26 },
+          Kompakte: { zeit: 2.60, km: 0.31 },
+          Mittelklasse: { zeit: 3.00, km: 0.33 },
+          Transporter: { zeit: 3.50, km: 0.39 }
+        }
+      },
+      vielfahrer: {
+        name: "Vielfahrertarif",
+        farbe: "bg-blue-50",
+        preise: {
+          Minis: { zeit: 1.68, km: 0.20 },
+          Kleine: { zeit: 1.92, km: 0.21 },
+          Kompakte: { zeit: 2.08, km: 0.25 },
+          Mittelklasse: { zeit: 2.40, km: 0.26 },
+          Transporter: { zeit: 2.80, km: 0.31 }
+        }
+      }
+    };
+
+    function vergleicheFahrzeuge() {
+      const tarifKey = document.getElementById("tarif").value;
+      const stunden = parseFloat(document.getElementById("stunden").value);
+      const kilometer = parseFloat(document.getElementById("kilometer").value);
+
+      const tarif = tarife[tarifKey];
+
+      let html = `
+        <h2 class="text-xl font-semibold mb-2 text-center">${tarif.name} – Preisvergleich nach Fahrzeugklasse</h2>
+        <div class="overflow-x-auto mt-6">
+  <table class="min-w-full text-sm text-left border border-gray-300 rounded overflow-hidden">
+    <thead class="bg-gray-100 text-gray-700 uppercase">
+      <tr>
+        <th class="p-2 whitespace-nowrap">Fahrzeugklasse</th>
+        <th class="p-2 text-right whitespace-nowrap">Zeitpreis</th>
+        <th class="p-2 text-right whitespace-nowrap">km-Preis</th>
+        <th class="p-2 text-right whitespace-nowrap">Gesamt</th>
+      </tr>
+    </thead>
+    <tbody class="text-gray-900">
+      <!-- dynamisch generierte rows folgen hier -->
+      `;
+
+      for (const [klasse, preise] of Object.entries(tarif.preise)) {
+        const zeit = preise.zeit * stunden;
+        const km = preise.km * kilometer;
+        const gesamt = zeit + km;
+
+        html += `
+  <tr class="border-b ${tarif.farbe}">
+    <td class="p-2 whitespace-nowrap">${klasse}</td>
+    <td class="p-2 text-right whitespace-nowrap">${zeit.toFixed(2)} €</td>
+    <td class="p-2 text-right whitespace-nowrap">${km.toFixed(2)} €</td>
+    <td class="p-2 text-right font-semibold whitespace-nowrap">${gesamt.toFixed(2)} €</td>
+  </tr>
+`;
+      }
+
+      html += `</tbody></table></div>`;
+      document.getElementById("vergleich").innerHTML = html;
+    }
+  </script>
+</body>
+</html>
